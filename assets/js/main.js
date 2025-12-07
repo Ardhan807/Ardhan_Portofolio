@@ -3,13 +3,12 @@ let currentImages = [];
 let currentIndex = 0;
 let currentTitle = '';
 let isModalOpen = false;
+let modal = null;
 
 // ==================== MODAL FUNCTIONS ====================
 
 // Fungsi untuk membuka modal dengan array gambar
 function openModal(images, title) {
-    const modal = document.getElementById('projectModal');
-    
     if (!modal || isModalOpen) return;
     
     isModalOpen = true;
@@ -17,24 +16,15 @@ function openModal(images, title) {
     currentTitle = title;
     currentIndex = 0;
     
-    // Prevent body scroll - simple method
+    // Prevent body scroll
     document.body.style.overflow = 'hidden';
     
-    // Show modal immediately
+    // Show modal with class
     modal.style.display = 'flex';
-    modal.style.opacity = '0';
+    modal.classList.add('show');
     
-    // Force reflow
-    modal.offsetHeight;
-    
-    // Show image first
+    // Show image
     showImage(currentIndex);
-    
-    // Then fade in modal
-    setTimeout(() => {
-        modal.style.opacity = '1';
-        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
-    }, 10);
 }
 
 // Fungsi untuk menampilkan gambar berdasarkan index
@@ -56,8 +46,10 @@ function nextImage(e) {
         e.preventDefault();
         e.stopPropagation();
     }
-    currentIndex = (currentIndex + 1) % currentImages.length;
-    showImage(currentIndex);
+    if (currentImages.length > 1) {
+        currentIndex = (currentIndex + 1) % currentImages.length;
+        showImage(currentIndex);
+    }
 }
 
 // Fungsi untuk gambar sebelumnya
@@ -66,8 +58,10 @@ function prevImage(e) {
         e.preventDefault();
         e.stopPropagation();
     }
-    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-    showImage(currentIndex);
+    if (currentImages.length > 1) {
+        currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+        showImage(currentIndex);
+    }
 }
 
 // Fungsi untuk menutup modal
@@ -77,13 +71,12 @@ function closeModal(e) {
         e.stopPropagation();
     }
     
-    const modal = document.getElementById('projectModal');
     if (!modal || !isModalOpen) return;
     
-    // Fade out
-    modal.style.opacity = '0';
-    modal.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+    // Remove show class for CSS transition
+    modal.classList.remove('show');
     
+    // Wait for transition then hide
     setTimeout(() => {
         modal.style.display = 'none';
         document.body.style.overflow = '';
@@ -93,84 +86,6 @@ function closeModal(e) {
         isModalOpen = false;
     }, 300);
 }
-
-// ==================== EVENT LISTENERS ====================
-
-// Jalankan setelah DOM selesai dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    
-    // Event listener untuk setiap project card
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        // Click event
-        card.addEventListener('click', handleCardClick, false);
-    });
-    
-    // Event listener untuk tombol close
-    const closeBtn = document.querySelector('.close');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal, false);
-    }
-    
-    // Event listener untuk tombol navigasi prev
-    const prevBtn = document.querySelector('.modal-prev');
-    if (prevBtn) {
-        prevBtn.addEventListener('click', prevImage, false);
-    }
-    
-    // Event listener untuk tombol navigasi next
-    const nextBtn = document.querySelector('.modal-next');
-    if (nextBtn) {
-        nextBtn.addEventListener('click', nextImage, false);
-    }
-    
-    // Event listener untuk click di luar gambar
-    const modal = document.getElementById('projectModal');
-    if (modal) {
-        modal.addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal(e);
-            }
-        }, false);
-    }
-    
-    // Event listener untuk keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (!isModalOpen) return;
-        
-        if (e.key === 'Escape') {
-            closeModal();
-        } else if (e.key === 'ArrowLeft') {
-            prevImage();
-        } else if (e.key === 'ArrowRight') {
-            nextImage();
-        }
-    }, false);
-    
-    // Touch swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    if (modal) {
-        modal.addEventListener('touchstart', function(e) {
-            touchStartX = e.changedTouches[0].screenX;
-        }, { passive: true });
-        
-        modal.addEventListener('touchend', function(e) {
-            touchEndX = e.changedTouches[0].screenX;
-            const diff = touchStartX - touchEndX;
-            const swipeThreshold = 50;
-            
-            if (Math.abs(diff) > swipeThreshold) {
-                if (diff > 0) {
-                    nextImage();
-                } else {
-                    prevImage();
-                }
-            }
-        }, { passive: true });
-    }
-});
 
 // Handle card click
 function handleCardClick(e) {
@@ -196,6 +111,85 @@ function handleCardClick(e) {
         }
     }
 }
+
+// ==================== EVENT LISTENERS ====================
+
+// Jalankan setelah DOM selesai dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // Get modal reference
+    modal = document.getElementById('projectModal');
+    
+    if (!modal) {
+        console.warn('Modal element not found');
+        return;
+    }
+    
+    // Event listener untuk setiap project card
+    const projectCards = document.querySelectorAll('.project-card');
+    projectCards.forEach(card => {
+        card.addEventListener('click', handleCardClick);
+    });
+    
+    // Event listener untuk tombol close
+    const closeBtn = document.querySelector('.close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModal);
+    }
+    
+    // Event listener untuk tombol navigasi
+    const prevBtn = document.querySelector('.modal-prev');
+    if (prevBtn) {
+        prevBtn.addEventListener('click', prevImage);
+    }
+    
+    const nextBtn = document.querySelector('.modal-next');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', nextImage);
+    }
+    
+    // Event listener untuk click di luar gambar
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Event listener untuk keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!isModalOpen) return;
+        
+        if (e.key === 'Escape') {
+            closeModal();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
+        }
+    });
+    
+    // Touch swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    modal.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        const swipeThreshold = 50;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextImage();
+            } else {
+                prevImage();
+            }
+        }
+    }, { passive: true });
+});
 
 // ==================== CONTACT FORM (Only for contact page) ====================
 
@@ -244,7 +238,7 @@ window.addEventListener('load', function() {
         
         // Reset form after short delay
         setTimeout(() => {
-            this.reset();
+            contactForm.reset();
         }, 1000);
     });
     
