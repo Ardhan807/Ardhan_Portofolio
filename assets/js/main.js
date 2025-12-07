@@ -2,6 +2,7 @@
 let currentImages = [];
 let currentIndex = 0;
 let currentTitle = '';
+let isModalOpen = false;
 
 // ==================== MODAL FUNCTIONS ====================
 
@@ -9,27 +10,31 @@ let currentTitle = '';
 function openModal(images, title) {
     const modal = document.getElementById('projectModal');
     
-    if (!modal) return;
+    if (!modal || isModalOpen) return;
     
+    isModalOpen = true;
     currentImages = images;
     currentTitle = title;
     currentIndex = 0;
     
-    // Prevent body scroll
+    // Prevent body scroll - simple method
     document.body.style.overflow = 'hidden';
-    document.body.style.position = 'fixed';
-    document.body.style.width = '100%';
     
+    // Show modal immediately
+    modal.style.display = 'flex';
+    modal.style.opacity = '0';
+    
+    // Force reflow
+    modal.offsetHeight;
+    
+    // Show image first
     showImage(currentIndex);
     
-    modal.style.display = 'flex';
-    
-    // Tambahkan class untuk animasi
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            modal.classList.add('show');
-        });
-    });
+    // Then fade in modal
+    setTimeout(() => {
+        modal.style.opacity = '1';
+        modal.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+    }, 10);
 }
 
 // Fungsi untuk menampilkan gambar berdasarkan index
@@ -40,53 +45,52 @@ function showImage(index) {
     
     if (!modalImg || !currentImages || currentImages.length === 0) return;
     
-    // Preload image
-    const img = new Image();
-    img.onload = function() {
-        modalImg.style.opacity = '0';
-        setTimeout(() => {
-            modalImg.src = currentImages[index];
-            modalCaption.textContent = currentTitle;
-            modalCounter.textContent = `${index + 1} / ${currentImages.length}`;
-            modalImg.style.opacity = '1';
-        }, 50);
-    };
-    img.src = currentImages[index];
+    modalImg.src = currentImages[index];
+    modalCaption.textContent = currentTitle;
+    modalCounter.textContent = `${index + 1} / ${currentImages.length}`;
 }
 
 // Fungsi untuk gambar berikutnya
 function nextImage(e) {
-    if (e) e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     currentIndex = (currentIndex + 1) % currentImages.length;
     showImage(currentIndex);
 }
 
 // Fungsi untuk gambar sebelumnya
 function prevImage(e) {
-    if (e) e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
     showImage(currentIndex);
 }
 
 // Fungsi untuk menutup modal
 function closeModal(e) {
-    if (e) e.stopPropagation();
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
     
     const modal = document.getElementById('projectModal');
-    if (!modal) return;
+    if (!modal || !isModalOpen) return;
     
-    modal.classList.remove('show');
-    
-    // Re-enable body scroll
-    document.body.style.overflow = '';
-    document.body.style.position = '';
-    document.body.style.width = '';
+    // Fade out
+    modal.style.opacity = '0';
+    modal.style.backgroundColor = 'rgba(0, 0, 0, 0)';
     
     setTimeout(() => {
         modal.style.display = 'none';
+        document.body.style.overflow = '';
         currentImages = [];
         currentIndex = 0;
         currentTitle = '';
+        isModalOpen = false;
     }, 300);
 }
 
@@ -98,69 +102,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Event listener untuk setiap project card
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Cek apakah yang di-click adalah link (GitHub atau Demo)
-            if (e.target.closest('.project-link')) {
-                return; // Jangan buka modal jika click pada link
-            }
-            
-            // Prevent default behavior
-            e.preventDefault();
-            e.stopPropagation();
-            
-            const imagesData = this.getAttribute('data-images');
-            const title = this.getAttribute('data-title');
-            
-            if (imagesData && title) {
-                try {
-                    const images = JSON.parse(imagesData);
-                    if (images && images.length > 0) {
-                        openModal(images, title);
-                    }
-                } catch (error) {
-                    console.error('Error parsing images data:', error);
-                }
-            }
-        });
-        
-        // Add touch feedback
-        card.addEventListener('touchstart', function() {
-            this.style.transform = 'scale(0.98)';
-        });
-        
-        card.addEventListener('touchend', function() {
-            this.style.transform = '';
-        });
+        // Click event
+        card.addEventListener('click', handleCardClick, false);
     });
     
     // Event listener untuk tombol close
     const closeBtn = document.querySelector('.close');
     if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-        closeBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            closeModal();
-        });
+        closeBtn.addEventListener('click', closeModal, false);
     }
     
     // Event listener untuk tombol navigasi prev
     const prevBtn = document.querySelector('.modal-prev');
     if (prevBtn) {
-        prevBtn.addEventListener('click', prevImage);
-        prevBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            prevImage();
-        });
+        prevBtn.addEventListener('click', prevImage, false);
     }
     
     // Event listener untuk tombol navigasi next
     const nextBtn = document.querySelector('.modal-next');
     if (nextBtn) {
-        nextBtn.addEventListener('click', nextImage);
-        nextBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            nextImage();
-        });
+        nextBtn.addEventListener('click', nextImage, false);
     }
     
     // Event listener untuk click di luar gambar
@@ -168,25 +129,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (modal) {
         modal.addEventListener('click', function(e) {
             if (e.target === this) {
-                closeModal();
+                closeModal(e);
             }
-        });
+        }, false);
     }
     
     // Event listener untuk keyboard navigation
     document.addEventListener('keydown', function(e) {
-        const modal = document.getElementById('projectModal');
+        if (!isModalOpen) return;
         
-        if (modal && modal.style.display === 'flex') {
-            if (e.key === 'Escape') {
-                closeModal();
-            } else if (e.key === 'ArrowLeft') {
-                prevImage();
-            } else if (e.key === 'ArrowRight') {
-                nextImage();
-            }
+        if (e.key === 'Escape') {
+            closeModal();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
         }
-    });
+    }, false);
     
     // Touch swipe support for mobile
     let touchStartX = 0;
@@ -199,31 +158,49 @@ document.addEventListener('DOMContentLoaded', function() {
         
         modal.addEventListener('touchend', function(e) {
             touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
+            const diff = touchStartX - touchEndX;
+            const swipeThreshold = 50;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextImage();
+                } else {
+                    prevImage();
+                }
+            }
         }, { passive: true });
     }
-    
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Swipe left - next image
-                nextImage();
-            } else {
-                // Swipe right - previous image
-                prevImage();
-            }
-        }
+});
+
+// Handle card click
+function handleCardClick(e) {
+    // Cek apakah yang di-click adalah link (GitHub atau Demo)
+    if (e.target.closest('.project-link')) {
+        return;
     }
     
-});
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const imagesData = this.getAttribute('data-images');
+    const title = this.getAttribute('data-title');
+    
+    if (imagesData && title) {
+        try {
+            const images = JSON.parse(imagesData);
+            if (images && images.length > 0) {
+                openModal(images, title);
+            }
+        } catch (error) {
+            console.error('Error parsing images data:', error);
+        }
+    }
+}
 
 // ==================== CONTACT FORM (Only for contact page) ====================
 
 // Check if we're on the contact page before attaching form listeners
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('load', function() {
     const contactForm = document.getElementById('contactForm');
     
     // Only run contact form code if the form exists
@@ -285,28 +262,6 @@ window.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
-    // Add error styling
-    const errorStyle = document.createElement('style');
-    errorStyle.textContent = `
-        .form-group input.error,
-        .form-group textarea.error {
-            border-color: #ff6b6b !important;
-            box-shadow: 0 0 10px rgba(255, 107, 107, 0.2) !important;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-5px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    `;
-    document.head.appendChild(errorStyle);
 });
 
 // Notification function
@@ -325,45 +280,14 @@ function showNotification(message) {
         border-radius: 12px;
         box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
         z-index: 10000;
-        animation: slideIn 0.5s ease;
         font-size: 0.95em;
     `;
-    
-    // Add animation
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes slideIn {
-            from {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        @keyframes slideOut {
-            from {
-                transform: translateX(0);
-                opacity: 1;
-            }
-            to {
-                transform: translateX(400px);
-                opacity: 0;
-            }
-        }
-    `;
-    document.head.appendChild(style);
     
     document.body.appendChild(notification);
     
     // Remove notification after 3 seconds
     setTimeout(() => {
-        notification.style.animation = 'slideOut 0.5s ease';
-        setTimeout(() => {
-            notification.remove();
-            style.remove();
-        }, 500);
+        notification.remove();
     }, 3000);
 }
 
@@ -409,7 +333,6 @@ function validateField(field) {
             color: #ff6b6b;
             font-size: 0.85em;
             margin-top: 5px;
-            animation: fadeIn 0.3s ease;
         `;
         field.parentElement.appendChild(errorDiv);
     }
