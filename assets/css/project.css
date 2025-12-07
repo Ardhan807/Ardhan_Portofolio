@@ -10,6 +10,10 @@
 
 html, body {
     height: 100%;
+    overflow-x: hidden;
+}
+
+body.modal-open {
     overflow: hidden;
 }
 
@@ -25,17 +29,16 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     padding: 30px 20px;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
-    overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
     section {
-        height: auto;
         min-height: 100vh;
+        height: auto;
     }
 }
 
@@ -105,19 +108,17 @@ section::after {
     flex-direction: column;
     width: 100%;
     max-width: 1200px;
-    max-height: calc(100vh - 60px);
     padding: 40px;
     background: rgba(20, 20, 20, 0.85);
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 30px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 100px rgba(255, 215, 0, 0.1);
-    overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
     .container {
-        max-height: none;
+        padding: 25px;
     }
 }
 
@@ -203,6 +204,7 @@ header ul li a.active {
     flex: 1;
     overflow-y: auto;
     padding-right: 10px;
+    -webkit-overflow-scrolling: touch;
 }
 
 .content-wrapper::-webkit-scrollbar {
@@ -282,6 +284,11 @@ header ul li a.active {
     flex-direction: column;
     overflow: hidden;
     cursor: pointer;
+    touch-action: manipulation;
+}
+
+.project-card:active {
+    transform: scale(0.98);
 }
 
 .project-card:hover {
@@ -344,6 +351,7 @@ header ul li a.active {
     gap: 10px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .project-card:hover .image-overlay {
@@ -545,7 +553,7 @@ header ul li a.active {
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 10000;
     left: 0;
     top: 0;
     width: 100%;
@@ -554,6 +562,7 @@ header ul li a.active {
     align-items: center;
     justify-content: center;
     transition: background-color 0.3s ease;
+    -webkit-overflow-scrolling: touch;
 }
 
 .modal.show {
@@ -622,8 +631,9 @@ header ul li a.active {
     font-weight: bold;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 1001;
+    z-index: 10001;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    touch-action: manipulation;
 }
 
 .close:hover,
@@ -647,8 +657,9 @@ header ul li a.active {
     cursor: pointer;
     border-radius: 10px;
     transition: all 0.3s ease;
-    z-index: 1001;
+    z-index: 10001;
     backdrop-filter: blur(10px);
+    touch-action: manipulation;
 }
 
 .modal-nav:hover {
