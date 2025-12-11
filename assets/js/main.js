@@ -75,7 +75,6 @@ function closeModal(e) {
     
     // Remove show class for CSS transition
     modal.classList.remove('show');
-    
     // Wait for transition then hide
     setTimeout(() => {
         modal.style.display = 'none';
