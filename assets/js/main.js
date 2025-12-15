@@ -21,6 +21,8 @@ function openModal(images, title) {
     
     // Show modal with class
     modal.style.display = 'flex';
+    // Force reflow for animation
+    modal.offsetHeight;
     modal.classList.add('show');
     
     // Show image
@@ -113,7 +115,7 @@ function handleCardClick(e) {
 
 // ==================== EVENT LISTENERS ====================
 
-// Jalankan setelah DOM selesai dimuat
+// Use DOMContentLoaded for faster initial load
 document.addEventListener('DOMContentLoaded', function() {
     
     // Get modal reference
@@ -124,11 +126,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Event listener untuk setiap project card
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('click', handleCardClick);
-    });
+    // Use event delegation for better performance
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (projectsGrid) {
+        projectsGrid.addEventListener('click', function(e) {
+            const card = e.target.closest('.project-card');
+            if (card && !e.target.closest('.project-link')) {
+                handleCardClick.call(card, e);
+            }
+        });
+    }
     
     // Event listener untuk tombol close
     const closeBtn = document.querySelector('.close');
@@ -167,20 +174,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Touch swipe support for mobile
+    // Touch swipe support for mobile with better performance
     let touchStartX = 0;
     let touchEndX = 0;
+    let touchStartTime = 0;
     
     modal.addEventListener('touchstart', function(e) {
         touchStartX = e.changedTouches[0].screenX;
+        touchStartTime = Date.now();
     }, { passive: true });
     
     modal.addEventListener('touchend', function(e) {
         touchEndX = e.changedTouches[0].screenX;
+        const touchDuration = Date.now() - touchStartTime;
         const diff = touchStartX - touchEndX;
         const swipeThreshold = 50;
         
-        if (Math.abs(diff) > swipeThreshold) {
+        // Only trigger if it's a quick swipe
+        if (Math.abs(diff) > swipeThreshold && touchDuration < 300) {
             if (diff > 0) {
                 nextImage();
             } else {
@@ -193,6 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // ==================== CONTACT FORM (Only for contact page) ====================
 
 // Check if we're on the contact page before attaching form listeners
+// Moved to 'load' event to ensure all resources are loaded
 window.addEventListener('load', function() {
     const contactForm = document.getElementById('contactForm');
     
