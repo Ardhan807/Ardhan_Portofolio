@@ -13,9 +13,9 @@ html, body {
     height: 100vh; 
     /* Prevent horizontal scrollbar universally */
     overflow-x: hidden; 
-    /* Prevent unwanted vertical scrollbar on desktop caused by padding/animations */
+    /* Prevent unwanted vertical scrollbar on desktop */
     overflow-y: hidden;
-    scroll-behavior: smooth; /* Added for smoother anchor links */
+    scroll-behavior: smooth; 
 }
 
 /* ==================== SECTION & BACKGROUND - REVISED ==================== */
@@ -27,7 +27,6 @@ section {
     /* Use strict height on desktop to fill screen */
     height: 100vh; 
     width: 100%;
-    /* Keep padding as defined */
     padding: 30px 20px;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
     /* Use overflow: hidden on desktop to clip background animations */
@@ -40,16 +39,17 @@ section {
         /* Allow content to scroll vertically on mobile */
         overflow: auto;
         overflow-x: hidden;
-        height: auto; /* Allow height to grow beyond 100vh on mobile */
+        height: auto; 
+        min-height: 100%; /* Fix mobile height issue */
         -webkit-overflow-scrolling: touch; 
     }
     
     section {
         height: auto; 
+        /* Use min-height: 100% (or 100vh for base) to ensure it fills screen, but allow overflow */
         min-height: 100vh;
         padding: 20px 15px;
-        /* Allow section content to be visible */
-        overflow: visible; 
+        overflow: visible; /* Allow section content to be visible on scroll */
     }
 }
 
@@ -138,16 +138,15 @@ section::after {
     border: 1px solid rgba(255, 215, 0, 0.2);
     border-radius: 30px;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 100px rgba(255, 215, 0, 0.1);
-    /* Set overflow: hidden to contain inner elements; content scrolling is handled by .content-wrapper */
     overflow: hidden; 
 }
 
 /* Reduce backdrop-filter on mobile for performance */
 @media screen and (max-width: 768px) {
     .container {
-        /* Allow container to grow if content is long */
+        /* Allow container height to be fully determined by its content on mobile */
         height: auto; 
-        min-height: calc(100vh - 40px);
+        min-height: auto; /* Remove vh dependence */
         max-height: none; 
         backdrop-filter: none;
         background: rgba(20, 20, 20, 0.95);
@@ -240,7 +239,7 @@ header ul li a.active {
 /* ==================== CONTENT WRAPPER ==================== */
 .content-wrapper {
     flex: 1;
-    /* Handles scrolling for content within the fixed-height container */
+    /* Handles scrolling for content within the fixed-height container (on desktop) */
     overflow-y: auto; 
     overflow-x: hidden;
     padding-right: 10px;
@@ -480,6 +479,7 @@ header ul li a.active {
     padding-top: 0;
     padding-bottom: 0;
     margin-bottom: 15px;
+    flex-grow: 1;
 }
 
 .tech-stack {
@@ -815,7 +815,6 @@ header ul li a.active {
 
 /* ==================== SOCIAL ICONS ==================== */
 .icon {
-    /* Use fixed position on mobile to prevent scrolling issues */
     position: absolute; 
     right: 30px;
     bottom: 30px;
