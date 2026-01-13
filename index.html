@@ -3,55 +3,659 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ardhan - Beranda</title>
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Ardhan - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
     <link href="assets/img/icon.png" rel="icon">
     <link href="assets/img/icon.png" rel="apple-touch-icon">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <section>
-        <div class="container">
-            <header>
-                <a href="#" class="logo">Portofolio</a>
-                <ul>
-                    <li><a href="index.html" class="active">Beranda</a></li>
-                    <li><a href="about.html">Tentang</a></li>
-                    <li><a href="project.html">Proyek</a></li>
-                    <li><a href="contact.html">Kontak</a></li>
-                </ul>
-            </header>
-            <div class="content">
-                <h2>Halo! Saya Ardhan 👋</h2>
-                <p>Mahasiswa <strong>Mekatronika & Kecerdasan Buatan</strong> yang mencari kesempatan magang untuk menyelesaikan masalah nyata dengan teknologi. Passionate dalam <strong>insights dari data kompleks.</strong></p>
-                <p>Saya percaya bahwa magang adalah kesempatan terbaik untuk mengubah teori menjadi praktek. Ready to contribute, learn fast, and make an impact!</p>
-                <a href="contact.html">Diskusi Peluang Magang</a>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-xl border-b border-orange-100/50 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8 lg:px-10 py-5">
+            <div class="flex justify-between items-center">
+                <a href="#home" class="text-2xl font-bold gradient-text hover:scale-105 transition-transform duration-300">
+                    Ardhan
+                </a>
+                <div class="hidden md:flex gap-2">
+                    <a href="#home" class="nav-link">Beranda</a>
+                    <a href="#about" class="nav-link">Tentang</a>
+                    <a href="#projects" class="nav-link">Proyek</a>
+                    <a href="#contact" class="nav-link">Kontak</a>
+                </div>
+                <div class="md:hidden">
+                    <button class="text-orange-500 hover:text-orange-600 text-2xl">☰</button>
+                </div>
             </div>
-            <div class="imgBox">
-                <img src="assets/img/foto.png" alt="Foto Ardhan" />
+        </div>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-16 pb-12 px-6 sm:px-8 lg:px-10 relative overflow-hidden">
+        <div class="max-w-5xl w-full mx-auto relative z-10">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Content -->
+                <div class="space-y-3 animate-fade-in">
+                    <div class="relative">
+                        <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-2 leading-tight">
+                            Halo!
+                        </h1>
+                        <h2 class="text-2xl md:text-3xl font-bold gradient-text leading-tight">
+                            Saya Ardhan
+                        </h2>
+                    </div>
+                    
+                    <div class="space-y-2.5 text-gray-600 text-[15px] leading-relaxed">
+                        <p class="text-justify">
+                            Mahasiswa <span class="text-orange-600 font-semibold">Mekatronika & Kecerdasan Buatan</span> yang sedang mencari kesempatan magang untuk menyelesaikan masalah nyata dengan teknologi.
+                            Tertarik pada <span class="text-orange-600 font-semibold">insights dari data kompleks</span>. Percaya bahwa magang adalah kesempatan terbaik mengubah teori menjadi praktek.
+                        </p>
+                        <p class="text-orange-700 font-semibold">
+                            Ready to contribute, learn fast, and make an impact!
+                        </p>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <a href="#contact" class="inline-block btn-primary text-white font-bold mt-4">
+                        Diskusi Peluang Magang
+                    </a>
+
+                    <!-- Social Icons -->
+                    <div class="flex gap-3 pt-4">
+                        <a href="https://drive.google.com/file/d/1Q9VrCqOAwFl7BGdmOYgG7jlmR296JDCe/view?usp=drive_link" target="_blank" rel="noopener" class="icon-box" title="CV">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
+                        </a>
+                        <a href="https://github.com/Ardhan807" target="_blank" rel="noopener" class="icon-box" title="GitHub">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/ardhan-anggana-prasetya-435388294/" target="_blank" rel="noopener" class="icon-box" title="LinkedIn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                        </a>
+                        <a href="mailto:angganaardhan@gmail.com" target="_blank" rel="noopener" class="icon-box" title="Email">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image - Blended with Background -->
+                <div class="hidden md:flex justify-center items-center relative">
+                    <img 
+                        src="assets/img/foto.png" 
+                        alt="Foto Ardhan" 
+                        class="relative w-full max-w-md opacity-90 floating-animation"
+                        style="filter: drop-shadow(0 10px 30px rgba(251, 146, 60, 0.2)) drop-shadow(0 0 60px rgba(249, 115, 22, 0.15));"
+                    />
+                </div>
             </div>
-            <ul class="icon">
-                <li>
-                    <a href="https://drive.google.com/file/d/1XrxOhDm1XoZSEu5ve-7YoZ5QBsJHXE9E/view?usp=sharing" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://github.com/Ardhan807" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="https://www.linkedin.com/in/ardhan-anggana-prasetya-435388294/" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
-                    </a>
-                </li>
-                <li>
-                    <a href="mailto:angganaardhan@gmail.com" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                    </a>
-                </li>
-            </ul>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT -->
+    <section id="about" class="min-h-screen py-12 px-6 sm:px-8 lg:px-10 relative overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="hexagon-pattern"></div>
+        <div class="floating-shape shape-2"></div>
+        <div class="circles-decoration">
+            <div class="circle-deco circle-deco-3"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto relative z-10">
+            <!-- Section Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+                    Tentang Saya
+                </h1>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Profile Section -->
+            <div class="mb-10">
+                <div class="bg-white/60 border-2 border-orange-100/60 rounded-2xl p-7 backdrop-blur-md hover:border-orange-200/80 transition-all shadow-sm relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <h2 class="text-xl font-bold text-orange-600 mb-4">Profil</h2>
+                    <div class="text-gray-600 space-y-2.5 leading-relaxed text-[15px]">
+                        <p class="text-justify">
+                            Saya adalah mahasiswa semester 5 jurusan <span class="text-orange-700 font-semibold">Mekatronika & Kecerdasan Buatan</span> di Universitas Pendidikan Indonesia. Dengan latar belakang yang unik menggabungkan sistem <span class="text-orange-700 font-semibold">mekanik, elektronik, Informatika dan AI</span>.
+                            Passion saya terletak pada pengembangan solusi teknologi yang inovatif, di mana saya senang mengeksplorasi berbagai pendekatan baik melalui sistem cerdas, automasi, maupun analisis data untuk menciptakan dampak nyata.
+                            Saya percaya bahwa integrasi antara hardware dan software adalah kunci untuk memecahkan tantangan kompleks di era digital ini.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skills Section -->
+            <div class="mb-10">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Keahlian Teknis</h2>
+                <div class="grid md:grid-cols-2 gap-5">
+                    <!-- Programming -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            Programming
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Python (Pandas, NumPy, Scikit-learn)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>SQL & Database Management</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>C/C++ untuk Embedded Systems</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Java Object Oriented Programming</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Data Analytics -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            Data Analytics
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Data Cleaning & Preprocessing</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Statistical Analysis</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Data Visualization (Tableau, Power BI)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Predictive Modeling</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Machine Learning -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            Machine Learning
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Supervised & Unsupervised Learning</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Neural Networks (TensorFlow, Keras)</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Model Evaluation & Optimization</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Computer Vision Basics</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Tools & Technologies -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            Tools & Technologies
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Google Colab, VS Code, Orange</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Git & Version Control</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Arduino & Raspberry Pi</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>MQTT, IoT Protocols</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- PLC -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            PLC & Automation
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>PLC Programming – Ladder Diagram</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Delta & Omron PLC</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>HMI Configuration & Design</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Industrial Control Systems</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="skill-card relative overflow-hidden">
+                        <div class="card-decoration"></div>
+                        <h3 class="text-lg font-bold text-orange-600 mb-4 flex items-center gap-2">
+                            Soft Skills
+                        </h3>
+                        <ul class="text-gray-600 space-y-2 text-[14px]">
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Problem Solving & Critical Thinking</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Team Collaboration</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Quick Learner</span></li>
+                            <li class="flex items-start gap-2"><span class="text-orange-500 mt-1">▸</span><span>Project Management</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Education Section -->
+            <div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Pendidikan</h2>
+                <div class="bg-white/60 border-2 border-orange-100/60 rounded-2xl p-7 backdrop-blur-md border-l-4 border-l-orange-500 shadow-sm relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-3 mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Universitas Pendidikan Indonesia</h3>
+                            <p class="text-orange-600 font-semibold mt-1 text-[15px]">S1 Mekatronika & Kecerdasan Buatan</p>
+                        </div>
+                        <span class="text-gray-500 text-sm font-medium">2023 - Sekarang</span>
+                    </div>
+                    <p class="text-gray-600 mb-2 text-[14px]">Semester 6 | Purwakarta, Jawa Barat</p>
+                    <p class="text-gray-600 leading-relaxed text-[14px]">Fokus pada integrasi sistem mekanik, elektronik, Informatika dan kecerdasan buatan dengan mengembangkan kemampuan dalam robotika, IoT, machine learning, automation dan analisis data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: PROJECTS -->
+    <section id="projects" class="min-h-screen py-12 px-6 sm:px-8 lg:px-10 relative overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="decorative-dots"></div>
+        <div class="floating-shape shape-1"></div>
+        <div class="circles-decoration">
+            <div class="circle-deco circle-deco-1"></div>
+        </div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <!-- Section Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Proyek Saya
+                </h1>
+                <p class="text-gray-600 mb-6 text-base">Koleksi seluruh proyek yang telah saya kerjakan dengan passion</p>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+                
+                <!-- Project 1 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project1.jpg" alt="Intelecta Cup" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Data Mining</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Intelecta Cup - Data Mining</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Ekstraksi pola dari dataset untuk memprediksi suhu rata-rata. Tim DataDrillers raih peringkat 26 dari 83 tim.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Kaggle</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/Intelecta-Cup-Data-Mining-Competition-DataDrillers.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project2.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Prediksi Biaya Rumah Sakit</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">EDA, Preprocessing, Feature Engineering dengan akurasi 87% untuk prediksi biaya tagih.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Scikit-learn</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/Memprediksi-Biaya-Tagih-rumah-sakit-penyakit-Tuberkolosis.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project3.png" alt="TemanLansia" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">UI/UX Design</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">TemanLansia</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Desain antarmuka aksesibel dengan Figma untuk kemudahan penggunaan bagi lansia.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Figma</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Prototyping</span>
+                        </div>
+                        <a href="https://www.figma.com/proto/akhOCstAcqPAPdapkZNQhG/Teman-Lansia" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                <polyline points="15 3 21 3 21 9"></polyline>
+                            </svg>
+                            Demo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 11 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project11.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Computer Vision</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Sistem Penghitung Buah Jeruk</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Menghitung jumlah buah jeruk menggunakan teknologi computer vision.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">YOLOv8</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/Sistem-Penghitung-Buah-Jeruk.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 9 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project9.jpeg" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Internet Of things</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Monitoring Kualitas Air Minum</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Membuat alat yang dapat memprediksi kualitas air layak minum atau tidak.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">ESP32</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Firebase</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/SISTEM-MONITORING-KUALITAS-AIR-LAYAK-MINUM.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project4.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Sistem Pakar</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Identifikasi Minat Bakat</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Mengidentifikasi Minat Bakat siswa dengan sistem pakar.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Certainty Factor</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Json</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/Sistem-Pakar-Identifikasi-Minat-Bakat-Khusus-pada-Siswa.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project6.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Terminal Agent</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Asisten Pengingat Pribadi</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Membuat jadwal, mengelola pengingat dan menjawab pertanyaan melalui terminal (Terhubung dengan google calender).</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">CLI interface</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/AI-Terminal-Personal-Reminder-Assistant.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project5.jpeg" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Internet Of Things</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Penyiram Tanaman Otomatis</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">penyiraman tanaman otomatis yang menggunakan sensor kelembapan tanah untuk menghemat penggunaan air.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">NodeMCU ESP8266</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Soil Moisture Sensor</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1Lky-wrC4Osz6uhg45moYThgoBHqNKIUE/view?usp=drive_link" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+                            </svg>
+                            File
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 7 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project7.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Terminal Agent</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Konverter Website Folder ke JPG</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Mengubah folder proyek web (HTML, CSS, JS) menjadi JPG.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">CLI interface</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Python</span>
+                        </div>
+                        <a href="https://github.com/Ardhan807/AI-Agent-Website-Folder-to-JPG-Converter.git" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                            </svg>
+                            GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 8 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project8.png" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">PLC</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Modul Delta PLC</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Menyusun modul instalasi dan latihan software Delta PLC (ISPSoft, DOPSoft, COMMGR).</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Delta PLC</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">Ladder Diagram</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1R-BOzpXThS772iNI8nqBS3oQGeNgWgYE/view?usp=drive_link" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+                            </svg>
+                            File
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project 10 -->
+                <div class="project-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="project-image">
+                        <img src="assets/img/portfolio/project10.jpeg" alt="Prediksi Biaya" />
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="tech-tag">Robotika</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-900 mb-2">Robot Line Follower Pemadam Api</h3>
+                        <p class="text-gray-600 text-[14px] mb-4 leading-relaxed">Membuat robot line follower yang dapat mendeteksi dan memadamkan api.</p>
+                        <div class="flex gap-2 mb-4 flex-wrap">
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">ESP32</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">OpenCV</span>
+                            <span class="text-xs px-3 py-1.5 rounded-lg bg-orange-50 text-orange-700 font-medium border border-orange-100">MQTT</span>
+                        </div>
+                        <a href="https://drive.google.com/file/d/1PrIjmk84RXs3ZGT_1xa6WgBPY48_E-Ut/view?usp=drive_link" class="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 text-orange-600 rounded-xl hover:bg-orange-100 transition-all font-medium text-sm" target="_blank">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="w-4 h-4">
+                            <path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7z"/>
+                            </svg>
+                            File
+                        </a>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: CONTACT -->
+    <section id="contact" class="min-h-screen py-12 px-6 sm:px-8 lg:px-10 relative overflow-hidden">
+        <!-- Background Decorations -->
+        <div class="hexagon-pattern"></div>
+        <div class="floating-shape shape-1"></div>
+        <div class="circles-decoration">
+            <div class="circle-deco circle-deco-2"></div>
+        </div>
+        
+        <div class="max-w-5xl mx-auto relative z-10">
+            <!-- Section Header -->
+            <div class="mb-8 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Mari Terhubung
+                </h1>
+                <p class="text-gray-600 mb-6 text-base">Saya terbuka untuk diskusi proyek baru, kolaborasi, atau sekadar mengobrol tentang data dan teknologi</p>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-400 mx-auto rounded-full"></div>
+            </div>
+
+            <!-- Contact Cards -->
+            <div class="grid md:grid-cols-2 gap-5 mb-10">
+                <!-- CV Card -->
+                <a href="https://drive.google.com/file/d/1Q9VrCqOAwFl7BGdmOYgG7jlmR296JDCe/view?usp=drive_link" target="_blank" class="contact-card cursor-pointer group relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zM16 18H8v-2h8v2zm0-4H8v-2h8v2zm0-4H8V8h8v2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">CV / Resume</h3>
+                            <p class="text-gray-600 text-sm mt-0.5">Lihat resume lengkap saya</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Email Card -->
+                <a href="mailto:angganaardhan@gmail.com" class="contact-card cursor-pointer group relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">Email</h3>
+                            <p class="text-gray-600 text-sm mt-0.5">angganaardhan@gmail.com</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- LinkedIn Card -->
+                <a href="https://www.linkedin.com/in/ardhan-anggana-prasetya-435388294/" target="_blank" class="contact-card cursor-pointer group relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">LinkedIn</h3>
+                            <p class="text-gray-600 text-sm mt-0.5">Ardhan Anggana Prasetya</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- GitHub Card -->
+                <a href="https://github.com/Ardhan807" target="_blank" class="contact-card cursor-pointer group relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900 group-hover:text-orange-600 transition-colors">GitHub</h3>
+                            <p class="text-gray-600 text-sm mt-0.5">@Ardhan807</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Location Card -->
+                <div class="contact-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Lokasi</h3>
+                            <p class="text-gray-600 text-sm mt-0.5">Tangerang, Banten</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Card -->
+                <div class="contact-card relative overflow-hidden">
+                    <div class="card-decoration"></div>
+                    <div class="flex items-center gap-4">
+                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-emerald-400 to-green-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">Status</h3>
+                            <p class="text-green-600 text-sm mt-0.5 font-medium">Terbuka untuk peluang magang</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </body>
