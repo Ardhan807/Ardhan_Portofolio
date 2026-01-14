@@ -621,6 +621,7 @@ body::after {
     .diagonal-stripes {
         opacity: 0.3;
 }
+}
 
 /* ============================================
    ACCESSIBILITY
@@ -651,5 +652,4 @@ body::after {
         background: white !important;
         border: 1px solid black !important;
     }
-}
 }
