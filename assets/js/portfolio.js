@@ -1,5 +1,39 @@
 // Portfolio Navigation Script
 document.addEventListener('DOMContentLoaded', function() {
+    // ===== Hamburger Menu Toggle =====
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburgerLines = document.querySelectorAll('.hamburger-line');
+    
+    if (hamburgerBtn && mobileMenu) {
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            mobileMenu.classList.toggle('hidden');
+            
+            // Animate hamburger lines
+            if (mobileMenu.classList.contains('hidden')) {
+                hamburgerLines[0].style.transform = 'translateY(0) rotate(0)';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[2].style.transform = 'translateY(0) rotate(0)';
+            } else {
+                hamburgerLines[0].style.transform = 'translateY(6px) rotate(45deg)';
+                hamburgerLines[1].style.opacity = '0';
+                hamburgerLines[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+            }
+        });
+        
+        // Close menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+                hamburgerLines[0].style.transform = 'translateY(0) rotate(0)';
+                hamburgerLines[1].style.opacity = '1';
+                hamburgerLines[2].style.transform = 'translateY(0) rotate(0)';
+            });
+        });
+    }
+
     // Smooth navigation for nav links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     
@@ -84,108 +118,4 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // ===== Robot 3D Viewer Section =====
-    const robotSection = document.getElementById('robot');
-    if (robotSection) {
-        const robotViewer = document.querySelector('.robot-viewer');
-        const robotVideo = document.querySelector('#robot video');
-        const robotPlayButton = document.querySelector('.robot-play-button');
-
-        if (robotVideo && robotViewer) {
-            // Intersection Observer for scroll animation
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        robotSection.style.opacity = '1';
-                        robotSection.style.transform = 'translateY(0)';
-                        robotSection.style.transition = 'all 0.8s ease-out';
-                    }
-                });
-            }, observerOptions);
-
-            observer.observe(robotSection);
-
-            // Set initial state
-            robotSection.style.opacity = '0';
-            robotSection.style.transform = 'translateY(20px)';
-
-            // Initialize video with loading state
-            robotViewer.classList.add('video-loading');
-
-            // Play button click handler
-            if (robotPlayButton) {
-                robotPlayButton.addEventListener('click', function() {
-                    robotVideo.play().catch(err => {
-                        console.log('Video playback error:', err);
-                    });
-                });
-            }
-
-            // Ensure video plays on user interaction for mobile
-            document.addEventListener('click', function initVideoPlay() {
-                if (robotVideo && robotVideo.paused) {
-                    robotVideo.play().catch(err => {
-                        console.log('Video autoplay initiated on user interaction');
-                    });
-                }
-            }, { once: true });
-
-            // Handle video loading states
-            robotVideo.addEventListener('loadstart', function() {
-                robotViewer.classList.add('video-loading');
-            });
-
-            robotVideo.addEventListener('loadeddata', function() {
-                setTimeout(() => {
-                    robotViewer.classList.remove('video-loading');
-                }, 300);
-            });
-
-            robotVideo.addEventListener('canplay', function() {
-                robotViewer.classList.remove('video-loading');
-            });
-
-            robotVideo.addEventListener('error', function() {
-                console.log('Primary video source failed, trying fallback');
-                robotViewer.classList.remove('video-loading');
-            });
-
-            // Handle video play to hide play button
-            robotVideo.addEventListener('play', function() {
-                if (robotPlayButton) {
-                    robotPlayButton.style.opacity = '0';
-                    robotPlayButton.style.pointerEvents = 'none';
-                }
-            });
-
-            // Show play button when paused
-            robotVideo.addEventListener('pause', function() {
-                if (robotPlayButton) {
-                    robotPlayButton.style.opacity = '1';
-                    robotPlayButton.style.pointerEvents = 'auto';
-                }
-            });
-        }
-
-        // Add smooth scroll for robot section navigation
-        const robotNavLinks = document.querySelectorAll('a[href="#robot"]');
-        robotNavLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.getElementById('robot');
-                if (target) {
-                    const offsetTop = target.offsetTop - 80;
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-    }
 });
